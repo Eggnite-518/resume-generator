@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  name      String   @default("")
+  email     String?
+  phone     String?
+  location  String?
+  linkedin  String?
+  github    String?
+  website   String?
+  summary   String?
+  photo     String?  // base64 data URL
+  updatedAt DateTime @updatedAt
+}
+
+model Experience {
+  id           String   @id @default(cuid())
+  type         String   // work | education | project | skill | award | other
+  title        String
+  organization String?
+  projectName  String?  // 所属项目名（work 类型可选填）
+  startDate    String?
+  endDate      String?
+  description  String   @default("")
+  tags         String   @default("[]") // JSON array string
+  rawInput     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Resume {
+  id         String   @id @default(cuid())
+  title      String
+  jdText     String   @default("")
+  content    String   @default("{}") // JSON string
+  template   String   @default("classic")
+  usedExpIds String   @default("[]") // JSON array string
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Setting {
+  key   String @id
+  value String
+}
