@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Profile {
@@ -50,4 +50,19 @@ model Resume {
 model Setting {
   key   String @id
   value String
+}
+
+model InterviewSession {
+  id          String   @id @default(cuid())
+  jobRole     String   // 目标岗位，如 "产品经理"
+  resumeText  String   // 解析后的简历纯文本
+  jdText      String   // 职位描述文本
+  phase       String   @default("hr") // "hr" | "tech" | "complete"
+  hrAnalysis  String   @default("{}") // JSON: HrAnalysis
+  questions   String   @default("[]") // JSON: InterviewQuestion[]
+  answers     String   @default("[]") // JSON: InterviewAnswer[]
+  scores      String   @default("[]") // JSON: QuestionScore[]
+  finalReport String?  // JSON: InterviewReport
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

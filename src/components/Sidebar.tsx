@@ -8,6 +8,7 @@ const navItems = [
   { href: "/profile", label: "个人信息", icon: "👤" },
   { href: "/experiences", label: "经历库", icon: "📚" },
   { href: "/generate", label: "生成简历", icon: "✨" },
+  { href: "/interview", label: "模拟面试", icon: "🎯" },
   { href: "/resumes", label: "历史简历", icon: "📄" },
   { href: "/settings", label: "设置", icon: "⚙️" },
 ];
